@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chasing The Cosmic Dragon</title>
+<style>
+  canvas {
+    border: 1px solid black;
+    height: 97vh;
+    width: 100%;
+    height: 100%;
+  }
+  #start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://i.guim.co.uk/img/media/e0e82ca8ac25bd9bd87799b133ad3157c39e0b0f/0_0_2560_1536/master/2560.jpg?width=1200&quality=85&auto=format&fit=max&s=ff2ccdbb0f8e6fb5c96081f67620f692");
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #start-button {
+    padding: .5em;
+    font-size: 3em;
+    cursor: pointer;
+  }
+  #text {
+        position: fixed;
+        padding: 5px;
+        background-color: white;
+        color: black;
+        font-size: 10px;
+      }
+      #disclaimer {
+        position: fixed;
+        padding: 1px;
+        background-color: white;
+        top: 75%;
+        right: 0%;
+        font-family: monospace;
+        color: black;
+      }
+</style>
+</head>
+<body>
+  
+<div id="start-screen">
+  <h1> <marquee behavior="scroll" direction="left">  <h1 id="title">Chasing The Cosmic Dragon</marquee></h1>
+  <button id="fullscreen-btn">GO FULLSCREEN</button>
+  <div id="text" style="font-family:  'Courier New', Courier, monospace;">READ DISCLAIMER BEFORE PLAYING</div>
+    <div id="disclaimer" style="font-family: 'Courier New', Courier, monospace;">DISCLAIMER: We would like to make it clear that the developers of this game do not condone or promote the use of drugs or any illegal substances. We understand that addiction is a complex issue that can affect anyone, regardless of their background or circumstances.
+
+      Our game is meant to provide entertainment and enjoyment, and we do not intend to trivialize or glamorize drug use in any way. We strongly encourage our players to make healthy and responsible choices, and to seek help if they are struggling with addiction or any other mental health issue. Drug addiction is a serious issue that affects millions of people worldwide. It is not a joke or something to be taken lightly. if you or someone you know is struggling with drug addiction "chasing the dragon" please call 1-800-662-4357 for help.</div>
+
+  
+  <button id="start-button" style="font-family: monospace;">start</button>
+</div>
+
+<canvas id="canvas"></canvas>
+<script>
+  const title = document.getElementById("title")
+  let colorIndex = 0;
+  setInterval(function() {
+    const colors = ["red", "green", "blue"];
+    title.style.color = colors[colorIndex];
+    colorIndex = (colorIndex + 1) % colors.length;
+  }, 100);
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let started = false;
+
+function goFullscreen() {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function startGame() {
+
+  // Set gameStarted to true when the player presses start
+  gameStarted = true;
+
+  // Start the game
+  console.log("Starting game...");
+  
+  // Go fullscreen
+  goFullscreen();
+
+    // Set canvas dimensions to match screen
+    canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Hide the start screen
+  const startScreen = document.getElementById("start-screen");
+  startScreen.style.display = "none";
+}
+
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click", startGame);
+
+// Game loop
+function gameLoop() {
+  // Only update and render the game if gameStarted is true
+  if (gameStarted) {
+    // Update game logic
+    update();
+    
+    // Render game
+    render();
+  }
+  
+  // Call gameLoop again on the next animation frame
+  requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+gameLoop();
+
+
+</script>
+    <script src="index.js"></script>
+  </body>
+</html>
+<button id="fullscreen-btn">Fullscreen</button>
+
+<audio src="./Audio/SF-ufo.mp3" autoplay loop></audio>
