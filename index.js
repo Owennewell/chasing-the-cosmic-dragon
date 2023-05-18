@@ -1,8 +1,8 @@
 // Set up canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-canvas.width = 1000;
-canvas.height = 600;
+canvas.width = 400;
+canvas.height = 300;
 
 
 // Initialize high score
